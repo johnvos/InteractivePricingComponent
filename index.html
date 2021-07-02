@@ -12,6 +12,8 @@
     <style>
 
         :root{
+            --color_DebugPink:hsl(300, 100%, 50%);
+
             --color_FullSiderBar:hsl(174, 77%, 80%);
             --color_SliderBackground: hsl(174, 86%, 45%);
             --color_DiscountBackground: hsl(14, 92%, 95%);
@@ -35,6 +37,141 @@
             src: url("fonts/Manrope-VariableFont_wght.ttf");
         }
 
+        .main-body-flex {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        .main-flex-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-content:center;
+            width:40%;
+        }
+
+        div.pricing-component-container {
+            background-color: var(--color_PricingComponentBackground);
+            border-radius: 10px;
+            box-shadow: hsla(226,10%,87%,0.7) 0px 10px 10px;
+        }
+
+        div.pricing-component-top-half{
+            display: flex;
+            flex-direction: row;
+            flex-wrap:wrap;
+            align-items:center;
+            justify-content:center;
+        }
+
+        div.pricing-component-bottom-half, div.icon-row {
+            display: flex;
+            flex-direction: row;
+            justify-content:center;
+        }
+
+        div.icon-row{
+            align-content:center;
+            justify-content:flex-start;
+        }
+
+        @media(max-width:800px){
+            div.pricing-component-bottom-half {
+                flex-direction: column;
+            }
+
+            div.icon-row{
+                justify-content:center;
+            }
+        }
+
+        p.information-text{
+            font-family:Manrope;
+            font-weight:var(--float_TextWeightSmall);
+            color:var(--color_Text);
+            font-size:15px;
+            margin:2px 5px;
+        }
+
+        p.top-line-text{
+            font-family:Manrope;
+            font-weight:var(--float_TextWeightLarge);
+            color:var(--color_Text);
+            font-size:15px;
+        }
+
+        p.price-text {
+            font-family: Manrope;
+            font-weight: var(--float_TextWeightLarge);
+            color: var(--color_CTABackground);
+            font-size: 30px;
+        }
+
+        p.discount-text{
+            font-family:Manrope;
+            font-weight: var(--float_TextWeightSmall);
+            color: var(--color_DiscountText);
+            font-size:12px;
+            background-color: var(--color_DiscountBackground);
+            border-radius:10px;
+            padding:2px 5px;
+        }
+
+        button.start-trial-button {
+            background-color: var(--color_CTABackground);
+            color: var(--color_CTAText);
+            border-radius: 40px;
+            border: none;
+            font-family: Manrope;
+            font-weight: var(--float_TextWeightSmall);
+            text-align: center;
+            padding: 0px 30px;
+            height: 45px;
+            width: 190px;
+            align-self: center;
+            cursor:pointer;
+        }
+
+        .slider{
+            -webkit-appearance:none;
+            background:var(--color_EmptySliderBar);
+            height:12px;
+            border-radius:6px;
+        }
+
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            background-image: url("images/icon-slider.svg");
+            background-repeat: no-repeat;
+            background-position: center center;
+            background-color: var(--color_DebugPink);
+            border-radius: 20px;
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            border: none;
+        }
+
+        .slider::-moz-range-thumb {
+            -webkit-appearance: none;
+            background-image: url("images/icon-slider.svg");
+            background-repeat: no-repeat;
+            background-position:center center;
+            background-color:var(--color_DebugPink);
+            border-radius: 20px;
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            border:none;
+        }
+
+        img.icon-check{
+            width:10px;
+            height:9px;
+            align-self:center;
+            margin-right:5px;
+        }
 
         .attribution {
             font-size: 11px;
@@ -47,25 +184,50 @@
     </style>
 </head>
 <body>
+    <div class="main-body-flex">
+        <div class="main-flex-container">
+            Simple, traffic-based pricing
+            Sign-up for our 30-day trial. No credit card required.
 
-    Simple, traffic-based pricing
-    Sign-up for our 30-day trial. No credit card required.
+            <div class="pricing-component-container">
 
-    Pageviews
-    $ /month
+                <div class="pricing-component-top-half">
+                    <p class="top-line-text">Pageviews</p>
+                    <p class="price-text">$ 16.00</p>
+                    <p class="top-line-text">/month</p>
 
-    Monthly Billing
-    Yearly Billing 25% discount
+                    <input class="slider" type="range" />
 
-    Unlimited websites
-    100% data ownership
-    Email reports
+                    <p class="information-text">Monthly Billing</p>
+                    <p class="information-text">Yearly Billing</p> 
+                    <p class="discount-text">25% discount</p>
 
-    Start my trial
+                </div>
+                <hr style="border:1px solid var(--color_ToggleBackground)"/>
+                <div class="pricing-component-bottom-half">
+                    <div>
+                        <div class="icon-row">
+                            <img src="images/icon-check.svg" class="icon-check" /><p class="information-text">Unlimited websites</p>
+                        </div>
+                        <div class="icon-row">
+                            <img src="images/icon-check.svg" class="icon-check" /><p class="information-text">100% data ownership</p>
+                        </div>
+                        <div class="icon-row">
+                            <img src="images/icon-check.svg" class="icon-check" /><p class="information-text">Email reports</p>
+                        </div>
 
+                    </div>
+
+                    <button class="start-trial-button">Start my trial</button>
+                    
+                </div>
+            </div>
+        </div>
+
+    </div>
     <div class="attribution">
         Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>.
-        Coded by <a href="#">Your Name Here</a>.
+        Coded by <a href="https://www.linkedin.com/in/donghyuk-kim/">John Kim</a>.
     </div>
 </body>
 </html>
