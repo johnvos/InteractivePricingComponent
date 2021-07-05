@@ -14,7 +14,7 @@
         :root{
             --color_DebugPink:hsl(300, 100%, 50%);
 
-            --color_FullSiderBar:hsl(174, 77%, 80%);
+            --color_FullSliderBar:hsl(174, 77%, 80%);
             --color_SliderBackground: hsl(174, 86%, 45%);
             --color_DiscountBackground: hsl(14, 92%, 95%);
             --color_DiscountText: hsl(15, 100%, 70%);
@@ -49,26 +49,47 @@
             justify-content: center;
             align-content:center;
             width:40%;
+            min-width:450px;
         }
 
         div.pricing-component-container {
-            background-color: var(--color_PricingComponentBackground);
+            background-color: white;
             border-radius: 10px;
             box-shadow: hsla(226,10%,87%,0.7) 0px 10px 10px;
         }
 
         div.pricing-component-top-half{
             display: flex;
-            flex-direction: row;
-            flex-wrap:wrap;
+            flex-direction: column;
             align-items:center;
             justify-content:center;
+        }
+
+        div.pricing-component-top-half-row{
+            display:flex;
+            flex-direction:row;
+            align-items:center;
+            justify-content:center;
+            width:100%;
+        }
+
+        .hidden-at-web{
+            width:0;
+            height:0;
+            visibility:hidden;
+        }
+
+        .hidden-at-mobile {
+            width: auto;
+            height: auto;
+            visibility:visible;
         }
 
         div.pricing-component-bottom-half, div.icon-row {
             display: flex;
             flex-direction: row;
-            justify-content:center;
+            justify-content: space-between;
+            padding:10px 30px 10px 30px;
         }
 
         div.icon-row{
@@ -76,22 +97,27 @@
             justify-content:flex-start;
         }
 
-        @media(max-width:800px){
-            div.pricing-component-bottom-half {
-                flex-direction: column;
-            }
-
-            div.icon-row{
-                justify-content:center;
-            }
+        p.outside-text-header {
+            font-family: Manrope;
+            font-weight: var(--float_TextWeightLarge);
+            color: var(--color_CTABackground);
+            font-size: 28px;
+            margin: 2px 5px;
+            text-align:center;
+            text-wrap:none;
+            margin-top:80px;
         }
 
-        p.information-text{
-            font-family:Manrope;
-            font-weight:var(--float_TextWeightSmall);
-            color:var(--color_Text);
-            font-size:15px;
-            margin:2px 5px;
+        p.information-text, p.outside-text-information {
+            font-family: Manrope;
+            font-weight: var(--float_TextWeightSmall);
+            color: var(--color_Text);
+            font-size: 15px;
+            margin: 2px 5px;
+        }
+
+        p.smaller-text{
+            font-size:13px;
         }
 
         p.top-line-text{
@@ -99,13 +125,15 @@
             font-weight:var(--float_TextWeightLarge);
             color:var(--color_Text);
             font-size:15px;
+            letter-spacing:0.2em;
+            text-transform:uppercase;
         }
 
         p.price-text {
             font-family: Manrope;
             font-weight: var(--float_TextWeightLarge);
             color: var(--color_CTABackground);
-            font-size: 30px;
+            font-size: 40px;
         }
 
         p.discount-text{
@@ -116,6 +144,10 @@
             background-color: var(--color_DiscountBackground);
             border-radius:10px;
             padding:2px 5px;
+        }
+
+        p.discount-text:after { 
+            content: '25% discount';
         }
 
         button.start-trial-button {
@@ -131,12 +163,20 @@
             width: 190px;
             align-self: center;
             cursor:pointer;
+            margin:30px 0px 30px 0px;
         }
 
         .slider{
             -webkit-appearance:none;
             background:var(--color_EmptySliderBar);
             height:12px;
+            border-radius:6px;
+            width:85%;
+        }
+
+        .slider::-moz-range-progress {
+            background-color: var(--color_FullSliderBar);
+            height: 12px;
             border-radius:6px;
         }
 
@@ -145,25 +185,91 @@
             background-image: url("images/icon-slider.svg");
             background-repeat: no-repeat;
             background-position: center center;
-            background-color: var(--color_DebugPink);
+            background-color: var(--color_FullSliderBar);
             border-radius: 20px;
             cursor: pointer;
             width: 40px;
             height: 40px;
             border: none;
+            box-shadow: var(--color_FullSliderBar) 0px 5px 15px;
+        }
+
+        .slider::-webkit-slider-thumb:active {
+            background-color: var(--color_SliderBackground);
+            cursor: grabbing;
         }
 
         .slider::-moz-range-thumb {
             -webkit-appearance: none;
             background-image: url("images/icon-slider.svg");
             background-repeat: no-repeat;
-            background-position:center center;
-            background-color:var(--color_DebugPink);
+            background-position: center center;
+            background-color: var(--color_FullSliderBar);
             border-radius: 20px;
             cursor: pointer;
             width: 40px;
             height: 40px;
-            border:none;
+            border: none;
+            box-shadow: var(--color_FullSliderBar) 0px 5px 15px;
+        }
+
+        .slider::-moz-range-thumb:active{
+            background-color:var(--color_SliderBackground);
+            cursor:grabbing;
+        }
+
+        .switch{
+            position: relative;
+            display:inline-block;
+            width:45px;
+            height:24px;
+        }
+
+        .switch input{
+            opacity:0;
+            width:0;
+            height:0;
+        }
+
+        .toggle-slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: var(--color_EmptySliderBar);
+            -webkit-transition: .4s;
+            transition: .4s;
+            border-radius: 34px;
+        }
+
+        .toggle-slider:before{
+            position:absolute;
+            content:"";
+            height:16px;
+            width:16px;
+            left:4px;
+            bottom:4px;
+            background-color:white;
+            -webkit-transition:.4s;
+            transition:.4s;
+            border-radius:50%;
+        }
+
+        input:checked + .toggle-slider{
+            background-color:var(--color_FullSliderBar);
+        }
+
+        input:focus + .toggle-slider {
+            box-shadow: 0 0 1px var(--color_FullSliderBar);
+        }
+
+        input:checked + .toggle-slider:before{
+            -webkit-transform: translateX(21px);
+            -ms-transform: translateX(21px);
+            transform:translateX(21px);
+            -moz-transform:translateX(21px);
         }
 
         img.icon-check{
@@ -181,26 +287,98 @@
         .attribution a {
             color: hsl(228, 45%, 44%);
         }
+
+        img.background {
+            position: absolute;
+            z-index: -2;
+            width: 100%;
+            height: 50%
+        }
+
+        div.space-around{
+            justify-content:space-around;
+        }
+
+        @media(max-width:1200px) {
+            div.pricing-component-bottom-half {
+                flex-direction: column;
+                justify-content: center;
+            }
+
+            div.icon-row {
+                justify-content: center;
+            }
+
+            .hidden-at-web {
+                width: auto;
+                height: auto;
+                visibility: visible;
+            }
+
+            .hidden-at-mobile {
+                width: 0;
+                height: 0;
+                visibility: hidden;
+            }
+
+            p.outside-text-information {
+                width: 200px;
+                align-self: center;
+            }
+
+            p.top-line-text {
+                margin: 45px 0px 45px 0px;
+            }
+
+            p.discount-text:after {
+                content:'-25%';
+            }
+
+            div.space-around {
+                justify-content: center;
+            }
+        }
     </style>
 </head>
 <body>
+    <img src="images/bg-pattern.svg" class="background"/>
     <div class="main-body-flex">
         <div class="main-flex-container">
-            Simple, traffic-based pricing
-            Sign-up for our 30-day trial. No credit card required.
+            <img src="images/pattern-circles.svg" style="position:absolute;z-index:-1;right:46%;top:40px;"/>
+            <p class="outside-text-header">
+                Simple, traffic-based pricing
+            </p>
+            <p class="outside-text-information" style="text-align:center;margin-bottom:80px;">
+                Sign-up for our 30-day trial. No credit card required.
+            </p>
 
             <div class="pricing-component-container">
 
                 <div class="pricing-component-top-half">
-                    <p class="top-line-text">Pageviews</p>
-                    <p class="price-text">$ 16.00</p>
-                    <p class="top-line-text">/month</p>
+                    <div class="pricing-component-top-half-row space-around">
+                        <p class="top-line-text"><span id="pageviewCount">100K</span> Pageviews</p>
+                        <div class="pricing-component-top-half-row hidden-at-mobile" style="width:auto;">
+                            <p id="web-price" class="price-text hidden-at-mobile">$16.00</p>
+                            <p class="information-text hidden-at-mobile" style="letter-spacing:0.1em;margin:0px 0px 0px 10px">/month</p>
+                        </div>
+                    </div>
 
-                    <input class="slider" type="range" />
+                    <input id="viewCountSlider" class="slider" type="range" min="1" max="100" onchange="repositionViewCount()"/>
 
-                    <p class="information-text">Monthly Billing</p>
-                    <p class="information-text">Yearly Billing</p> 
-                    <p class="discount-text">25% discount</p>
+                    <div class="pricing-component-top-half-row hidden-at-web">
+                        <p id="mobile-price" class="price-text" style="margin:40px 0px 0px 0px;">$16.00</p>
+                        <p class="information-text" style="letter-spacing:0.1em;margin:40px 0px 0px 10px;">/month</p>
+                    </div>
+
+                    <div class="pricing-component-top-half-row" style="margin:40px 0px 40px 0px">
+                        <p class="information-text smaller-text">Monthly Billing</p>
+                        <label class="switch">
+                            <input id="discountCheckbox" type="checkbox"/>
+                            <span class="toggle-slider"></span>
+                        </label>
+                        <p class="information-text smaller-text">Yearly Billing</p>
+                        <p class="discount-text"></p>
+                    </div>
 
                 </div>
                 <hr style="border:1px solid var(--color_ToggleBackground)"/>
@@ -229,5 +407,71 @@
         Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>.
         Coded by <a href="https://www.linkedin.com/in/donghyuk-kim/">John Kim</a>.
     </div>
+
+    <script>
+        let finalPrice;
+
+        let test = 0;
+
+        function updateViewCount() {
+            var viewCount = document.getElementById("viewCountSlider").value;
+
+            var values = [1, 5, 10, 50, 100];
+            var prices = [8, 12, 16, 24, 36];
+            for (var i = 0; i < values.length - 1; i++) {
+                if (viewCount >= values[i] && viewCount < values[i+1]) {
+                    viewCount = values[i];
+                    finalPrice = prices[i];
+                    break;
+                }
+            }
+
+            if (viewCount == 100) finalPrice = prices[prices.length-1];
+
+            var suffix = "K";
+            if (viewCount == 100) {
+                suffix = "M";
+                viewCount = 1;
+            }
+            
+            document.getElementById("pageviewCount").innerHTML = viewCount + suffix;
+        }
+
+        function repositionViewCount() {
+            var viewCount = document.getElementById("viewCountSlider").value;
+
+            var values = [1, 5, 10, 50, 100];
+            for (var i = 0; i < values.length - 1; i++) {
+                if (viewCount >= values[i] && viewCount < values[i + 1]) {
+                    viewCount = values[i];
+                }
+            }
+
+            document.getElementById("viewCountSlider").value = viewCount;
+        }
+
+        function recalculatePrice() {
+            var priceToDisplay;
+
+            var discountChecked = document.getElementById("discountCheckbox").checked;
+
+            if (discountChecked) {
+                priceToDisplay = 0.75 * finalPrice;
+            } else {
+                priceToDisplay = finalPrice;
+            }
+
+            document.getElementById("web-price").innerHTML = "$ " + priceToDisplay.toFixed(2);
+            document.getElementById("mobile-price").innerHTML = "$ " + priceToDisplay.toFixed(2);
+        }
+
+        function onUpdate() {
+            updateViewCount();
+            recalculatePrice();
+        }
+
+        recalculatePrice();
+        setInterval(onUpdate, 1);
+    </script>
 </body>
 </html>
