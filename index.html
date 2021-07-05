@@ -341,10 +341,10 @@
     </style>
 </head>
 <body>
-    <img src="images/bg-pattern.svg" class="background"/>
+    <img src="images/bg-pattern.svg" class="background" />
     <div class="main-body-flex">
         <div class="main-flex-container">
-            <img src="images/pattern-circles.svg" style="position:absolute;z-index:-1;right:46%;top:40px;"/>
+            <img src="images/pattern-circles.svg" style="position:absolute;z-index:-1;right:46%;top:40px;" />
             <p class="outside-text-header">
                 Simple, traffic-based pricing
             </p>
@@ -363,7 +363,7 @@
                         </div>
                     </div>
 
-                    <input id="viewCountSlider" class="slider" type="range" min="1" max="100" onchange="repositionViewCount()"/>
+                    <input id="viewCountSlider" class="slider" type="range" min="1" max="100" onchange="repositionViewCount()" />
 
                     <div class="pricing-component-top-half-row hidden-at-web">
                         <p id="mobile-price" class="price-text" style="margin:40px 0px 0px 0px;">$16.00</p>
@@ -373,7 +373,7 @@
                     <div class="pricing-component-top-half-row" style="margin:40px 0px 40px 0px">
                         <p class="information-text smaller-text">Monthly Billing</p>
                         <label class="switch">
-                            <input id="discountCheckbox" type="checkbox"/>
+                            <input id="discountCheckbox" type="checkbox" />
                             <span class="toggle-slider"></span>
                         </label>
                         <p class="information-text smaller-text">Yearly Billing</p>
@@ -381,7 +381,7 @@
                     </div>
 
                 </div>
-                <hr style="border:1px solid var(--color_ToggleBackground)"/>
+                <hr style="border:1px solid var(--color_ToggleBackground)" />
                 <div class="pricing-component-bottom-half">
                     <div>
                         <div class="icon-row">
@@ -397,12 +397,16 @@
                     </div>
 
                     <button class="start-trial-button">Start my trial</button>
-                    
+
                 </div>
             </div>
         </div>
 
     </div>
+    <br />
+    <br />
+    <br />
+    <br />
     <div class="attribution">
         Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>.
         Coded by <a href="https://www.linkedin.com/in/donghyuk-kim/">John Kim</a>.
@@ -419,21 +423,21 @@
             var values = [1, 5, 10, 50, 100];
             var prices = [8, 12, 16, 24, 36];
             for (var i = 0; i < values.length - 1; i++) {
-                if (viewCount >= values[i] && viewCount < values[i+1]) {
+                if (viewCount >= values[i] && viewCount < values[i + 1]) {
                     viewCount = values[i];
                     finalPrice = prices[i];
                     break;
                 }
             }
 
-            if (viewCount == 100) finalPrice = prices[prices.length-1];
+            if (viewCount == 100) finalPrice = prices[prices.length - 1];
 
             var suffix = "K";
             if (viewCount == 100) {
                 suffix = "M";
                 viewCount = 1;
             }
-            
+
             document.getElementById("pageviewCount").innerHTML = viewCount + suffix;
         }
 
